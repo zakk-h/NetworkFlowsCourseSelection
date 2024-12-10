@@ -291,7 +291,7 @@ class CourseSelector:
         # SGLE requirement
         prob += (
             pulp.lpSum(y_sgle.get(bin_name, 0) for bin_name in y_sgle) >= 
-            1,  # Need at least 1 SGLE course
+            2,  # Need at least 2 SGLE courses
             "Req_SGLE"
         )
         constraint_count += 1
