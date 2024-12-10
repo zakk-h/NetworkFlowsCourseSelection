@@ -280,8 +280,10 @@ class CourseSelector:
         
         # FL requirement
         prob += (
-            pulp.lpSum(y_fl.get(bin_name, 0) for bin_name in x) >= 
-            self.requirements['FL'], 
+            pulp.lpSum(x[f"bin_{hash(bin_key)}_{i}"] 
+                    for bin_key, bin_data in bins.items() 
+                    for i in range(min(bin_data["count"], 12)) 
+                    if 'FL' in bin_key) >= 3,
             "Req_FL"
         )
         constraint_count += 1
